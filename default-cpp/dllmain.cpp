@@ -1,6 +1,5 @@
 #include "pch.h"
-#include <cocos2d.h>
-#include <MinHook.h>
+
 
 DWORD WINAPI my_thread(void* hModule) {
 #ifdef DEBUG
