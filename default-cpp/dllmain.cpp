@@ -8,13 +8,19 @@ DWORD WINAPI my_thread(void* hModule) {
     freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
 #endif // DEBUG
 
-    MH_Initialize();
+    // Hook Proccess if the minhook library was not found (Important if you are using minhook
+	
+	if(MH_Initialize() != MH_OK){
+		
+		FreeLibraryAndExitThread(reinterpret_cast<HMODULE>(hModule), 0);
+		
+	}
 	
 	//
 
     MH_EnableHook(MH_ALL_HOOKS);
 
-    return 0;
+    return true;
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
